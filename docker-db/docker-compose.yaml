@@ -1,0 +1,21 @@
+# Use postgres/example user/password credentials
+version: '3.9'
+
+services:
+  question_collector:
+    container_name: question_collector_db 
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: question_collector
+      POSTGRES_USER: user          
+      POSTGRES_PASSWORD: password      
+      POSTGRES_HOST_AUTH_METHOD: trust
+      PGSSLMODE: disable
+    ports:
+      - 5432:5432
+    volumes:
+      - ./db/data:/var/lib/postgresql/data
+      - ./db/entrypoint:/docker-entrypoint-initdb.d
+volumes:
+  pgdata:
