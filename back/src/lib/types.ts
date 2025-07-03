@@ -21,6 +21,9 @@ export type CompleteQuestion = Question & {
     alternatives: Alternative[];
     subject: Subject
 };
+export type CompleteQuestionBody = Question & {
+    alternatives: Alternative[];
+};
 
 export type NewCompleteQuestion = NewQuestion & {
     alternatives: NewAlternative[];

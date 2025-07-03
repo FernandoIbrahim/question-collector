@@ -34,7 +34,7 @@ import {
     id: serial("id").primaryKey(),
     year: integer("year").notNull(),
     knowledgeArea: knowledgeAreaEnum("knowledge_area").notNull(),
-    subjectId: integer("subject_id").notNull().references(() => subjects.id),
+    subject_id: integer("subject_id").notNull().references(() => subjects.id),
     title: text("title").notNull(),
     context: text("context").notNull(),
     alternativesIntroduction: text("alternatives_introduction").notNull(),
@@ -56,7 +56,7 @@ import {
   
   export const questionsRelations = relations(questions, ({ one, many }) => ({
     subject: one(subjects, {
-      fields: [questions.subjectId],
+      fields: [questions.subject_id],
       references: [subjects.id],
     }),
     alternatives: many(alternatives),

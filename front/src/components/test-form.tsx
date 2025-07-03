@@ -4,6 +4,7 @@ import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { questionFromSchema } from "@/lib/types";
+import toast, { Toaster } from 'react-hot-toast';
 
 import {
   Form,
@@ -23,6 +24,7 @@ import { Checkbox } from "@/components/ui/checkbox"
 
 import { useQuestionContext } from "@/context/question-context";
 import { useCallback, useEffect, useMemo } from "react";
+import { postQuestion } from "@/services/question.service";
 
 type QuestionFormType = z.infer<typeof questionFromSchema>;
 
@@ -40,9 +42,22 @@ export default function QuestionForm() {
       name: "alternatives",
     });
 
-    function onSubmit(values: QuestionFormType) {
-      setQuestion(values)
-      console.log("✅ Form data:", values);
+    async function onSubmit(values: QuestionFormType) {
+
+      try{
+
+        setQuestion(values)
+        console.log("✅ Form data:", values);
+        await postQuestion(values);
+
+        toast.success('Questão criada com sucesso!.');
+
+      }catch(error){
+
+        toast.error('Por um erro interno, não possivel criar a questão tente novamente!')
+
+      }
+
     }
 
     const watchedValues = form.watch();
@@ -59,7 +74,7 @@ export default function QuestionForm() {
         if (result.success) {
           memoizedSetQuestion(result.data);
         }
-      }, 300);
+      }, 100);
     
       return () => clearTimeout(timeoutId);
     }, [watchedValues, memoizedSetQuestion]);
@@ -292,6 +307,10 @@ export default function QuestionForm() {
           </Button>
         </form>
       </Form>
+      <Toaster
+        position="bottom-right"
+        reverseOrder={false}
+      />
     </div>
   );
 }

@@ -24,9 +24,9 @@ export default function QuestionViewer() {
         </div>
 
         <div>
-          <p className="mt-4 font-medium text-gray-800">
+          <div className="mt-4 font-medium text-gray-800">
             <ReactMarkdown>{question.alternativesIntroduction}</ReactMarkdown>
-          </p>
+          </div>
           <ul className="mt-2 space-y-3">
             {question.alternatives.map((alt) => (
               <li

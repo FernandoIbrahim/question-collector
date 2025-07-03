@@ -1,14 +1,16 @@
 import { alternatives, questions, subjects } from "../../db/schema";
-import { Alternative, CompleteQuestion, NewAlternative, NewCompleteQuestion, NewQuestion, Question, Subject, questionPayload} from 'src/lib/types';
+import { Alternative, CompleteQuestion, CompleteQuestionBody, NewAlternative, NewCompleteQuestion, NewQuestion, Question, Subject, questionPayload} from 'src/lib/types';
 import { db } from '../../db/index';
 import { eq } from "drizzle-orm"
 import { getFormattedQuestion } from "./chatgpt";
 export async function createQuestion(question: questionPayload): Promise<CompleteQuestion> {
 
 
-  const completeQuestion: CompleteQuestion | null = await getFormattedQuestion(question);
+  const completeQuestion: CompleteQuestionBody | null = await getFormattedQuestion(question);
 
   if(completeQuestion != null){
+
+    console.log(completeQuestion.subject_id)
 
     const [createdQuestion] = await db
     .insert(questions)
@@ -32,7 +34,7 @@ export async function createQuestion(question: questionPayload): Promise<Complet
     const questionSubject: Subject = await db
       .select()
       .from(subjects)
-      .where(eq(subjects.id, completeQuestion?.subjectId))
+      .where(eq(subjects.id, completeQuestion?.subject_id))
       .execute();
       
       return {
@@ -64,7 +66,7 @@ export async function findQuestionById( questionId : number): Promise<CompleteQu
     const [questionSubject] = await db
     .select()
     .from(subjects)
-    .where(eq(subjects.id, findedQuestion.subjectId))
+    .where(eq(subjects.id, findedQuestion.subject_id))
     .execute();
 
     return {

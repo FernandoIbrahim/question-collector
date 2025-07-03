@@ -3,6 +3,7 @@
 import QuestionForm from "@/components/test-form";
 import { QuestionProvider } from "../context/question-context";
 import QuestionViewer from "@/components/question-viwer";
+import { ImageLinkGenerator } from "@/components/image-input";
 
 export default function Page() {
   return (
@@ -11,7 +12,8 @@ export default function Page() {
         <div className="flex w-full">
           <QuestionForm />
         </div>
-        <div className="flex w-full">
+        <div className="flex flex-col items-center w-full">
+          <ImageLinkGenerator/>
           <QuestionViewer/>
         </div>
       </div>

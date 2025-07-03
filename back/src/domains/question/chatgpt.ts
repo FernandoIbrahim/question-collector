@@ -1,9 +1,9 @@
-import { CompleteQuestion, questionPayload } from "src/lib/types";
+import { CompleteQuestion, CompleteQuestionBody, questionPayload } from "src/lib/types";
 require('dotenv').config();
 
 const API_KEY = process.env.API_KEY;
 
-async function getFormattedQuestion(prompt: questionPayload): Promise<CompleteQuestion | null> {
+async function getFormattedQuestion(prompt: questionPayload): Promise<CompleteQuestionBody | null> {
   // Validação básica
   if (!API_KEY) {
     console.error("API_KEY não encontrada no arquivo .env");
@@ -36,8 +36,6 @@ Você é um assistente especializado em processar questões de múltipla escolha
 2. Remover quebras de linhas desnecessárias nos campos 'alternatives_introduction' e 'context' para melhor legibilidade
 3. **CALCULAR os parâmetros de TRI (Teoria de Resposta ao Item) como um corretor oficial do ENEM**
 
-## Lista de Valores para 'subject_id'
-1- ECOLOGIA | 2- FISIOLOGIA HUMANA | 3- GENÉTICA E BIOTECNOLOGIA | 4- CITOLOGIA | 5- QUÍMICA ORGÂNICA | 6- ESTRUTURA ATÔMICA | 7- PROPRIEDADE DOS MATERIAIS | 8- ONDULATÓRIA | 9- ELETRICIDADE E MAGNETISMO | 10- MECÂNICA | 11- QUÍMICA | 12- FÍSICA | 13- BIOLOGIA | 17- EVOLUÇÃO E ORIGEM DA VIDA | 18- BOTÂNICA E ZOOLOGIA | 19- MICROBIOLOGIA E IMUNOLOGIA | 20- ESTEQUIOMETRIA | 21- TERMOQUÍMICA | 22- ELETROQUÍMICA | 23- QUÍMICA AMBIENTAL | 24- ÓPTICA | 25- TERMODINÂMICA | 26- FÍSICA MODERNA
 
 ## Parâmetros de TRI - Teoria de Resposta ao Item (Modelo ENEM)
 
@@ -101,10 +99,13 @@ Você é um assistente especializado em processar questões de múltipla escolha
 
 4. **Retorne APENAS o JSON** do objeto com:
    - Textos formatados (quebras de linha corrigidas)
-   - subject_id definido
+   - Selecicione com base nos valores a baixo a categoria que mais se assemelha a matéria da questão com o atributo subject id
    - discrimination calculado
    - difficulty calculado  
    - guessing calculado
+
+   ## Lista de Valores para 'subject_id'
+   1- ECOLOGIA | 2- FISIOLOGIA HUMANA | 3- GENÉTICA E BIOTECNOLOGIA | 4- CITOLOGIA | 5- QUÍMICA ORGÂNICA | 6- ESTRUTURA ATÔMICA | 7- PROPRIEDADE DOS MATERIAIS | 8- ONDULATÓRIA | 9- ELETRICIDADE E MAGNETISMO | 10- MECÂNICA | 11- QUÍMICA | 12- FÍSICA | 13- BIOLOGIA | 17- EVOLUÇÃO E ORIGEM DA VIDA | 18- BOTÂNICA E ZOOLOGIA | 19- MICROBIOLOGIA E IMUNOLOGIA | 20- ESTEQUIOMETRIA | 21- TERMOQUÍMICA | 22- ELETROQUÍMICA | 23- QUÍMICA AMBIENTAL | 24- ÓPTICA | 25- TERMODINÂMICA | 26- FÍSICA MODERNA
 
 **IMPORTANTE:** Seus cálculos devem ser consistentes com o padrão ENEM. Questões muito específicas ou que exigem conhecimento avançado terão difficulty mais alto. Questões com distratores bem elaborados terão guessing mais baixo.` 
       },
@@ -166,6 +167,7 @@ Você é um assistente especializado em processar questões de múltipla escolha
     let formattedQuestion;
     try {
       formattedQuestion = JSON.parse(cleanMessage);
+      console.log("Questão formatada:" + cleanMessage);
     } catch (parseError) {
       console.error("Erro ao fazer parse do JSON:", {
         cleanMessage,
@@ -178,7 +180,7 @@ Você é um assistente especializado em processar questões de múltipla escolha
       throw new Error("Objeto retornado não é válido");
     }
 
-    const completeQuestion: CompleteQuestion = {
+    const completeQuestion: CompleteQuestionBody = {
       ...formattedQuestion,
       type: "free" // Forçando o tipo como esperado
     };
