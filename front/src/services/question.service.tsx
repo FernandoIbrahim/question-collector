@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import { z } from 'zod';
 import { questionFromSchema } from '@/lib/types';
-import { useQuestionContext } from '@/context/question-context';
 
 type QuestionFormType = z.infer<typeof questionFromSchema>;
 

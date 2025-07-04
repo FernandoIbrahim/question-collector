@@ -5,7 +5,6 @@ import { Button } from "./ui/button"
 import { uploadImage } from "@/services/image.service"
 import { useState } from "react";
 import toast from "react-hot-toast";
-import sharp from "sharp";
 
 
 export function ImageLinkGenerator() {
@@ -29,6 +28,7 @@ export function ImageLinkGenerator() {
 
       catch(error){
 
+        console.log(error)
         toast.error("Erro ao fazer o upload da imagem, tente novamente");
 
       }

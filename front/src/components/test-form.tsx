@@ -57,7 +57,7 @@ export default function QuestionForm() {
         }).then(() => form.reset())
 
       }catch(error){
-
+        console.log(error);
         toast.error('Por um erro interno, não possivel criar a questão tente novamente!')
 
       }
