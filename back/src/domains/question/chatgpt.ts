@@ -111,7 +111,7 @@ Você é um assistente especializado em processar questões de múltipla escolha
       },
       { role: "user", content: JSON.stringify(prompt) }
     ],
-    temperature: 0.3, // Reduzido para maior consistência nos cálculos
+    temperature: 0.5, // Reduzido para maior consistência nos cálculos
     max_tokens: 3000 // Aumentado para acomodar as explicações detalhadas
   };
 

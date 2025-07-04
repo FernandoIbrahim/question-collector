@@ -24,7 +24,7 @@ import {
       });
     }
   
-    async uploadFile(file: Express.Multer.File): Promise<string> {
+    async uploadFile(file: Express.Multer.File, newBuffer: Buffer): Promise<string> {
 
         const folder = 'imagens'
         const key = `${folder}/${uuidv4()}`;
@@ -32,7 +32,7 @@ import {
         const params: PutObjectCommandInput = {
           Bucket: process.env.AWS_BUCKET_NAME!,
           Key: key,
-          Body: file.buffer,
+          Body: newBuffer,
           ContentType: file.mimetype,
         };
       

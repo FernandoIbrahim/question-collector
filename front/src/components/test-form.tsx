@@ -48,9 +48,13 @@ export default function QuestionForm() {
 
         setQuestion(values)
         console.log("✅ Form data:", values);
-        await postQuestion(values);
+        const promise = postQuestion(values);
 
-        toast.success('Questão criada com sucesso!.');
+        toast.promise( promise,  {
+          loading: "Carregando",
+          success: 'Questão criada com sucesso!',
+          error: 'Por um erro interno, não possivel criar a questão tente novamente!'
+        }).then(() => form.reset())
 
       }catch(error){
 

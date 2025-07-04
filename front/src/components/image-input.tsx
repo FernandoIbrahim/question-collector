@@ -5,6 +5,7 @@ import { Button } from "./ui/button"
 import { uploadImage } from "@/services/image.service"
 import { useState } from "react";
 import toast from "react-hot-toast";
+import sharp from "sharp";
 
 
 export function ImageLinkGenerator() {
@@ -13,6 +14,8 @@ export function ImageLinkGenerator() {
       try{
 
       if(file != null){
+
+        
         const { imageUrl } = await uploadImage(file);
         setLink(imageUrl);
         toast.success("Upload feito com sucesso");
@@ -22,6 +25,8 @@ export function ImageLinkGenerator() {
       toast.error("Seleciona uma imagem antes de enviar");
 
       }
+
+
       catch(error){
 
         toast.error("Erro ao fazer o upload da imagem, tente novamente");
@@ -52,7 +57,7 @@ export function ImageLinkGenerator() {
                 getLink();
             }}>Get Link</Button>
           </div>
-          <p className="text-xs mt-2">{link}</p>
+          <p className="text-xs mt-2 w-full">{link}</p>
       </div>
     )
 
