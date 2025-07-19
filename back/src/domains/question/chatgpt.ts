@@ -87,22 +87,36 @@ Você é um assistente especializado em processar questões de múltipla escolha
    - Qualidade das alternativas
    - Contexto e aplicabilidade
 
-2. **Para questões de Ciências da Natureza (Física, Química, Biologia):**
-   - Questões com cálculos complexos: discrimination alta (1.5-2.5)
-   - Questões conceituais básicas: discrimination moderada (0.8-1.2)
-   - Questões interpretativas: discrimination variável conforme complexidade
 
-3. **Atribua valores realistas baseados na experiência do ENEM:**
-   - A maioria das questões tem discrimination entre 0.8-1.8
-   - A dificuldade média do ENEM fica entre -0.5 e +1.0
-   - O guessing raramente passa de 0.15 em questões bem elaboradas
-
-4. **Retorne APENAS o JSON** do objeto com:
+2. **Retorne APENAS o JSON** do objeto com:
    - Textos formatados (quebras de linha corrigidas)
    - Selecicione com base nos valores a baixo a categoria que mais se assemelha a matéria da questão com o atributo subject id
    - discrimination calculado
    - difficulty calculado  
    - guessing calculado
+
+   Exemplos de parâmetros (discriminação, dificuldade, acerto ao acaso):  
+   1,7008	1,15068	0,14749
+   2,82041	2,00971	0,12385
+   1,88342	1,48748	0,27044
+   2,9073	0,12756	0,21003
+   1,92924	2,72331	0,17678
+   2,54499	0,32436	0,18403
+   1,57481	1,65344	0,22044
+   3,21388	1,90806	0,17205
+   2,39814	1,69946	0,19017
+   2,40418	0,72028	0,21294
+   1,85393	0,63073	0,178
+   1,71246	-0,07547 0,17405
+   2,91476	1,12362	0,11243
+   3,01205	1,50249	0,18745
+   1,99076	0,67442	0,18662
+   2,29781	1,5026	0,13077
+   1,0062	2,26887	0,12084
+   3,99324	0,94637	0,16656
+   0,29544	3,80025	0,02691
+   3,17216	1,35723	0,2178
+   0,50541	0,95758	0,04207
 
    ## Lista de Valores para 'subject_id'
    1- ECOLOGIA | 2- FISIOLOGIA HUMANA | 3- GENÉTICA E BIOTECNOLOGIA | 4- CITOLOGIA | 5- QUÍMICA ORGÂNICA | 6- ESTRUTURA ATÔMICA | 7- PROPRIEDADE DOS MATERIAIS | 8- ONDULATÓRIA | 9- ELETRICIDADE E MAGNETISMO | 10- MECÂNICA | 11- QUÍMICA | 12- FÍSICA | 13- BIOLOGIA | 17- EVOLUÇÃO E ORIGEM DA VIDA | 18- BOTÂNICA E ZOOLOGIA | 19- MICROBIOLOGIA E IMUNOLOGIA | 20- ESTEQUIOMETRIA | 21- TERMOQUÍMICA | 22- ELETROQUÍMICA | 23- QUÍMICA AMBIENTAL | 24- ÓPTICA | 25- TERMODINÂMICA | 26- FÍSICA MODERNA
